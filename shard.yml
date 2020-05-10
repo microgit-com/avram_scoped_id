@@ -1,0 +1,14 @@
+name: avram_scoped_id
+version: 0.1.0
+
+authors:
+  - Håkan Nylén <hakan@dun.se>
+
+crystal: 0.34.0
+
+dependencies:
+  avram:
+    github: luckyframework/avram
+    branch: master
+
+license: MIT
