@@ -1,7 +1,7 @@
 language: crystal
 
 addons:
-  postgresql
+  - postgresql
 
 script:
   - crystal spec
