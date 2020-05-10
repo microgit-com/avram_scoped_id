@@ -6,15 +6,16 @@ module AvramScopedId
 
   extend self
 
-  def set(column : Avram::Attribute(Int32?),
+  def set(column : Avram::Attribute(Int64 | Nil),
           query : Avram::Queryable) : Nil
     set(column, query)
   end
 
-  def set(column : Avram::Attribute(Int32?),
+  def set(column : Avram::Attribute(Int64 | Nil),
           query : Avram::Queryable) : Nil
+    return unless column.value.nil?
     id = get_next_scoped_id(query, column)
-    column.value = id.to_i
+    column.value = id.to_i64
   end
 
   private def get_next_scoped_id(query, column)

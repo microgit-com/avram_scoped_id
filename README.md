@@ -33,7 +33,7 @@ require "avram_scoped_id"
 ```
 
 ## Usage
-Create column `scoped_id` in your model, as `Int32` or `Int64`
+Create column `scoped_id` in your model, as `Int64` - if not it will fail.
 
 Then You add it to the operation where you want to save the new scoped id. Like `SaveArticle`.
 
