@@ -1,6 +1,6 @@
 language: crystal
 
-addons:
+services:
   - postgresql
 
 script:
