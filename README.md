@@ -1,5 +1,7 @@
 # avram_scoped_id
 
+[![Build Status](https://travis-ci.org/microgit-com/avram_scoped_id.svg?branch=master)](https://travis-ci.org/microgit-com/avram_scoped_id)
+
 An small helper to set an scoped id for the model, based on the query you set as well.
 
 ## Installation
