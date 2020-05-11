@@ -67,6 +67,23 @@ end
 
 > Good thing to know is that variables in the query might fail due to they can be `Nil` - So use `needs` and set that in the query and if necessary with `.not_nil!`
 
+### Find scoped_id
+To find by scoped id you can add method to query, like this:
+```crystal
+class ArticleQuery < Article::BaseQuery
+  def find_scoped(scoped_id : Int64) : Article
+    scoped_id(scoped_id).first
+  end
+end
+```
+
+Don't forget to query based on the query you used when setting the scoped_id, like `ArticleQuery.new.team_id(team_id)` when finding the Article.
+
+So example, the whole query would be:
+```crystal
+ArticleQuery.new.team_id(team_id).find_scoped(1)
+```
+
 ## Development
 
 TODO: Write development instructions here
