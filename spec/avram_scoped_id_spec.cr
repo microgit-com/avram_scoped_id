@@ -37,7 +37,7 @@ describe AvramScopedId do
   end
 end
 
-private def scoped(scoped_id, query = UserQuery.new)
+private def scoped(scoped_id : Avram::Attribute(Int64 | Nil), query = UserQuery.new)
   AvramScopedId.set(scoped_id, query)
 end
 

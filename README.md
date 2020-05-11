@@ -18,7 +18,7 @@ An small helper to set an scoped id for the model, based on the query you set as
 
 **If using Lucky**, require the shard in your src/shards.cr file after requiring Avram:
 
-```
+```crystal
 # In src/shards.cr
 # Put this after `require "avram"`
 require "avram_scoped_id"
@@ -26,18 +26,35 @@ require "avram_scoped_id"
 
 **If not using Lucky**, require the shard after Avram:
 
-```
+```crystal
 # In whichever file you require your shards
 # Put this after `require "avram"`
 require "avram_scoped_id"
 ```
 
 ## Usage
-Create column `scoped_id` in your model, as `Int64` - if not it will fail.
+Create column `scoped_id` in your model, as `Int64`
+You can call it differently if you want, just change to your column in the set method inside the `before_save` below
+
+```crystal
+class AddScopeIdToArticle::V20200510065019 < Avram::Migrator::Migration::V1
+  def migrate
+    alter table_for(Article) do
+      add scoped_id : Int64, default: 0
+    end
+  end
+
+  def rollback
+    # drop table_for(Thing)
+  end
+end
+```
+
+> Feel free to add index on the scoped_id for faster queries later on.
 
 Then You add it to the operation where you want to save the new scoped id. Like `SaveArticle`.
 
-```
+```crystal
 class SaveArticle < Article::SaveOperation
   before_save do
     AvramScopedId.set column: scoped_id,
@@ -45,8 +62,6 @@ class SaveArticle < Article::SaveOperation
   end
 end
 ```
-
-**scoped_id** is hardcoded for now due to how avram is built. so for now you need to have scoped_id on column.
 
 > Good thing to know is that variables in the query might fail due to they can be `Nil` - So use `needs` and set that in the query and if necessary with `.not_nil!`
 
